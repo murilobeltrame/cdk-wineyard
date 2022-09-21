@@ -3,7 +3,8 @@ import { DocumentClient } from "aws-sdk/clients/dynamodb";
 import { badRequest, noContent, notFound, serverError } from "../shared/responses";
 import { Grape } from "./interfaces";
 
-const AWS = require('aws-sdk');
+const XRay = require('aws-xray-sdk');
+const AWS = XRay.captureAWS(require('aws-sdk'));
 const dynamo: DocumentClient = new AWS.DynamoDB.DocumentClient();
 const TableName: string = process.env.TABLE_NAME as string;
 

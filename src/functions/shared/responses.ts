@@ -7,7 +7,7 @@ const headers = {
 export function ok(data: any) {
     return {
         statusCode: 200,
-        body: JSON.stringify(data),
+        body: typeof data === 'string'? data : JSON.stringify(data),
         headers
     }
 }

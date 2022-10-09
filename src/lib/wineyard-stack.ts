@@ -3,6 +3,7 @@ import { Construct } from 'constructs';
 import { CacheStack } from './cache-stack';
 import { GrapesApiStack } from './grapes-api-stack';
 import { VpcStack } from './vpc-stack';
+import { WineriesApiStack } from './wineries-api-stack';
 
 export class WineyardStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -12,5 +13,6 @@ export class WineyardStack extends cdk.Stack {
     const cache = new CacheStack(this, 'WineyardCacheStack', {vpc});
 
     new GrapesApiStack(this, 'WineyardGrapesApiStack', {cache, vpc});
+    new WineriesApiStack(this, 'WineyardWineriesApiStack', {cache, vpc});
   }
 }

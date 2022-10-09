@@ -1,8 +1,9 @@
+require('dotenv').config()
 import { spec } from "pactum";
 
 describe('Grapes API should ', () => {
 
-    const url = 'https://0az6naf2ik.execute-api.us-east-2.amazonaws.com/prod'
+    const url = process.env.GRAPES_URL as string
     const grape = {name: 'Carmenere', color: 'Red'}
 
     test(' create a grape', async () => {

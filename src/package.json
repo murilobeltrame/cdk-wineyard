@@ -1,24 +1,24 @@
 {
-  "name": "wineyard",
+  "name": "src",
   "version": "0.1.0",
   "bin": {
-    "wineyard": "bin/wineyard.js"
+    "src": "bin/src.js"
   },
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
     "test": "jest",
     "cdk": "cdk",
-    "sam": "cdk synth && sam local start-api --template ./cdk.out/WineyardStack.template.json"
+    "synth": "cdk synth",
+    "sam": "npm run synth && sam local start-api --template ./cdk.out/SrcStack.template.json"
   },
   "devDependencies": {
-    "@aws-solutions-constructs/aws-lambda-dynamodb": "^2.25.0",
-    "@types/aws-lambda": "^8.10.104",
-    "@types/aws-sdk": "^2.7.0",
+    "@types/aws-lambda": "^8.10.109",
+    "@types/babel__traverse": "7.18.2",
     "@types/jest": "^27.5.2",
-    "@types/node": "^10.17.27",
+    "@types/node": "10.17.27",
     "@types/prettier": "2.6.0",
-    "aws-cdk": "^2.42.1",
+    "aws-cdk": "2.53.0",
     "aws-lambda": "^1.0.7",
     "jest": "^27.5.1",
     "ts-jest": "^27.1.4",
@@ -26,10 +26,7 @@
     "typescript": "~3.9.7"
   },
   "dependencies": {
-    "@redis/client": "^1.3.0",
-    "aws-cdk-lib": "2.42.1",
-    "aws-sdk": "^2.1220.0",
-    "aws-xray-sdk": "^3.3.7",
+    "aws-cdk-lib": "2.53.0",
     "constructs": "^10.0.0",
     "source-map-support": "^0.5.21"
   }

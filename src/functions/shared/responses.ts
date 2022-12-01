@@ -1,54 +1,28 @@
-const headers = {
-    'Content-Type': 'application/json',
+const emptyHeader = {
     'Access-Control-Allow-Origin': '*'
 }
 
-// OKs
-export function ok(data: any) {
+const defaultHeaders = {
+    'Content-Type': 'application/json',
+    ... emptyHeader
+}
+
+function response(statusCode: number, data: any, headers: any) {
     return {
-        statusCode: 200,
-        body: typeof data === 'string'? data : JSON.stringify(data),
+        statusCode,
+        body: typeof data === 'string' ? data : JSON.stringify(data),
         headers
     }
 }
 
-export function created(data: any) {
-    return {
-        statusCode: 201,
-        body: JSON.stringify(data),
-        headers
-    }
-}
+export function ok (data: any) { return response(200, data, defaultHeaders) }
 
-export function noContent() {
-    return {
-        statusCode: 204,
-        body: '',
-        headers: {
-            'Access-Control-Allow-Origin': '*'
-        }
-    }
-}
+export function created (data: any, path: string) { return response(201, data, {'Location': path, ... defaultHeaders}) }
 
-// Client Error
-export function badRequest(message?: string) {
-    return {
-        statusCode: 400,
-        body: message || 'Bad Request'
-    }
-}
+export function noContent () { return response (204, '', emptyHeader) }
 
-export function notFound(message?: string) {
-    return {
-        statusCode: 404,
-        body: message || 'Not Found'
-    }
-}
+export function badRequest (message?: string) { return response (400, message || 'Bad Request', defaultHeaders) }
 
-// Server Error
-export function serverError() {
-    return {
-        statusCode: 500,
-        body: 'Server Error'
-    }
-}
+export function notFound (message?: string) { return response (404, message || 'Not Found', defaultHeaders) }
+
+export function serverError () { return response (500, 'Server Error', defaultHeaders) }
